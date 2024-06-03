@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nguyễn Hồng Nhung - B20DCPT150</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="./assets/css/base.css" />
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <div class="header">
+    <div class="overview">
+      <a href="" class="home">
+        <h3>Smart Home</h3>
+      </a>
+    </div>
+    <div class="menuList">
+      <ul class="menuListItem">
+        <li>
+          <a id="dashboard" href="#" onClick="showContent('wrapper',this)">Dashboard</a>
+        </li>
+        <li>
+          <a id="data" href="#" onClick="showContent('datasensors',this)">Data Sensors</a>
+        </li>
+        <li>
+          <a id="action" href="#" onClick="showContent('actionHistory',this)">Action History</a>
+        </li>
+        <li>
+          <a id="profile" href="#" onClick="showContent('infor',this)">Profile</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- Dashboard -->
+  <div class="hidden tabContent" id="wrapper">
+    <div class="envir">
+      <div class="envirItem">
+        <div class="envirTitle">
+          <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#FFFF"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-thermometer">
+            <path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z" />
+          </svg>
+          <span>Nhiệt độ</span>
+        </div>
+        <p class="envirTemp">26°C</p>
+      </div>
+      <div class="envirItem1">
+        <div class="envirTitle">
+          <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none"
+            stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-droplets">
+            <path
+              d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z" />
+            <path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97" />
+          </svg>
+          <span>Độ ẩm</span>
+        </div>
+        <p class="envirHum">50%</p>
+      </div>
+      <div class="envirItem2">
+        <div class="envirTitle">
+          <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none"
+            stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-sun">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2" />
+            <path d="M12 20v2" />
+            <path d="m4.93 4.93 1.41 1.41" />
+            <path d="m17.66 17.66 1.41 1.41" />
+            <path d="M2 12h2" />
+            <path d="M20 12h2" />
+            <path d="m6.34 17.66-1.41 1.41" />
+            <path d="m19.07 4.93-1.41 1.41" />
+          </svg>
+          <span>Ánh sáng</span>
+        </div>
+        <p class="envirLux">120 lux</p>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="chartFeature featureItem">
+        <canvas id="myChart" style="width: 600px; height: 350px; margin: auto; padding-top: 50px"></canvas>
+        <p>
+          <b>Chú thích:</b> Cột bên trái ứng với
+          <span style="color: #65e48c">nhiệt độ</span> và
+          <span style="color: #3a98f1">độ ẩm</span> , cột bên phải ứng với
+          <span style="color: #f1e500">ánh sáng</span>
+        </p>
+      </div>
+      <div class="switchFeature">
+        <div class="lightSwitch featureItem">
+          <label>
+            <div class="lamp" id="lamp"></div>
+            <input type="checkbox" id="toggleSwitch" />
+            <span></span>
+          </label>
+        </div>
+        <div class="fanSwitch featureItem">
+          <label>
+            <div class="fan" id="fan"></div>
+            <input type="checkbox" id="toggleSwitchFan" />
+            <span></span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Data sensors  -->
+  <div id="datasensors" class="tabContent">
+    <label for="attributeRowsSelect">Chọn số hàng: </label>
+    <select id="attributeRowsSelect">
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="25">25</option>
+      <option value="50">50</option>
+    </select>
+
+    <label for="attributeDataSensorSelect">Chọn giá trị: </label>
+    <select id="attributeDataSensorSelect">
+      <option value="all">Tất cả</option>
+      <option value="temp">Nhiệt độ</option>
+      <option value="hum">Độ ẩm</option>
+      <option value="light">Ánh sáng</option>
+    </select>
+
+
+    <div class="searchDataSensor-container">
+      <input type="text" id="searchInputDataSensor" placeholder="Tìm kiếm..." />
+      <button onclick="handleSearch()">Tìm kiếm</button>
+    </div>
+    
+    <table id="datasensorTable">
+      <thead>
+        <tr id="tableHeaders">
+          <th>Id</th>
+          <th>Thời gian</th>
+      </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <div id="pagination"></div>
+  </div>
+
+  <!-- Action history -->
+  <div id="actionHistory" class="tabContent">
+    <label for="attributeRowsSelect1">Chọn số hàng: </label>
+    <select id="attributeRowsSelect1">
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="25">25</option>
+      <option value="50">50</option>
+    </select>
+
+    <label for="attributeActionSelect">Chọn giá trị: </label>
+    <select id="attributeActionSelect">
+      <option value="all">Tất cả</option>
+      <option value="id_device">Thiết bị</option>
+      <option value="status">Hành động</option>
+    </select>
+
+
+    <div class="searchDataSensor-container">
+      <input type="text" id="searchInputAction" placeholder="Tìm kiếm..." />
+      <button onclick="handleSearch()">Tìm kiếm</button>
+    </div>
+    
+    <table id="actionTable">
+      <thead>
+        <tr id="tableHeaders1">
+          <th>Id</th>
+          <th>Thời gian</th>
+      </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <div id="pagination1"></div>
+  </div>
+
+  <!-- Profile -->
+  <div class="container tabContent" id="infor">
+    <div class="profileContent">
+      <div class="left">
+        <div class="title">
+          <h1>Hi!</h1>
+          <div class="name">I'm Hong Nhung</div>
+        </div>
+        <div class="about_me">
+          <table>
+            <tr>
+              <td class="thead">D.O.B</td>
+              <td class="content">01.11.2002</td>
+            </tr>
+            <tr>
+              <td class="thead">Phone</td>
+              <td class="content">0359471790</td>
+            </tr>
+            <tr>
+              <td class="thead thead_edu">Education</td>
+              <td class="content">
+                <span class="ptit">Posts and Telecommunications Institute of Technology</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="thead_hidden"></td>
+              <td class="content">
+                <span class="mul">Multimedia technology</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="thead">Email</td>
+              <td class="content">
+                <a href="" class="email">nhnhungg1112@gmail.com</a>
+              </td>
+            </tr>
+            <tr>
+              <td class="thead">Social</td>
+              <td class="content">
+                <a href="https://www.facebook.com/nhnhun1112" target="_blank" class="fb"><i
+                    class="fa-brands fa-facebook"></i></a>
+                <a href="https://www.instagram.com/nhnhunnn/" _blank class="ig"><i
+                    class="fa-brands fa-instagram"></i></a>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="right">
+        <div class="avatar">
+          <img src="./assets/images/avt1.jpg" alt="" class="avt" />
+        </div>
+        <div class="quotes">
+          <span class="quo_text">"Life isn’t about waiting for the storm to pass. It’s about
+            learning to dance in the rain."</span>
+        </div>
+        <div class="click"></div>
+        <button type="button" class="btn">Contact with me</button>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="./assets/script.js"></script>
+  <script src="./assets/datasensors.js"></script>
+  sc
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900;1000&display=swap');
+:root{
+    --bgr-color: #F1F4F6;
+    --font: 'Nunito', sans-serif;
+    --text-color: #101038;
+}
+body{
+    box-sizing: border-box;
+    font-family: var(--font);
+    background-color: var(--bgr-color);
+    color: var(--text-color);
+}
+.hidden{
+    max-width: 1140px;
+    margin: auto;
+}
+a{
+    text-decoration: none;
+}
